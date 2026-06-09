@@ -563,6 +563,16 @@ a.btn-glow[style*="transparent"]:hover {
   align-items: center;
   gap: 72px;
 }
+.about-me {
+  font-family: var(--font-head);
+  font-size: 1.9rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff 30%, var(--accent3) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 18px;
+}
 
 #about .about-text-col {
   flex: 1;
