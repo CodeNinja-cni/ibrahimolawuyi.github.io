@@ -388,3 +388,18 @@ if (statsBar) {
 
   statsObs.observe(statsBar);
 }
+
+document.getElementById("contact-form")
+.addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  emailjs.sendForm(
+    "service_e48hxxp",
+    "template_h9qk37b",
+    this
+  ).then(() => {
+    alert("Message sent!");
+  }, (error) => {
+    alert("Failed: " + error.text);
+  });
+});
