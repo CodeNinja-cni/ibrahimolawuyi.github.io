@@ -1,4 +1,4 @@
-console.log("CodeNinja loaded 🚀");
+console.log("Ibrahim.dev loaded 🚀");
 
 /* ══════════════════════════════════════════════
    0. EMAILJS CONFIG
@@ -7,12 +7,12 @@ console.log("CodeNinja loaded 🚀");
      replace the three strings below with your
      real IDs from the EmailJS dashboard.
    ══════════════════════════════════════════════ */
-const EMAILJS_PUBLIC_KEY  = "-Q3JjosgvNeUgYDNY";     // Account → API Keys
-const EMAILJS_SERVICE_ID  = "service_e48hxxp";     // Email Services → Service ID
-const EMAILJS_TEMPLATE_ID = "template_0mtip9e";    // Email Templates → Template ID
+const EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY";     // Account → API Keys
+const EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID";     // Email Services → Service ID
+const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";    // Email Templates → Template ID
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (window.emailjs && EMAILJS_PUBLIC_KEY !== "-Q3JjosgvNeUgYDNY") {
+  if (window.emailjs && EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
     emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
   }
 });
@@ -220,7 +220,7 @@ if (form) {
       return;
     }
 
-    if (!window.emailjs || EMAILJS_SERVICE_ID === "service_e48hxxp" || EMAILJS_TEMPLATE_ID === "template_0mtip9e") {
+    if (!window.emailjs || EMAILJS_SERVICE_ID === "YOUR_SERVICE_ID") {
       showToast("Form isn't connected yet — email me directly for now.", "error");
       return;
     }

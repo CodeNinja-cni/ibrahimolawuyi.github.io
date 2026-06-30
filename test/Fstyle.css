@@ -57,7 +57,7 @@ body {
 }
 
 /* ── CURSOR GLOW ── */
-/* .cursor-glow {
+.cursor-glow {
   position: fixed;
   width: 380px;
   height: 380px;
@@ -69,7 +69,7 @@ body {
   z-index: 2;
   transition: left 0.07s linear, top 0.07s linear;
   mix-blend-mode: screen;
-} */
+}
 
 @media (hover: none) {
   .cursor-glow { display: none; }
