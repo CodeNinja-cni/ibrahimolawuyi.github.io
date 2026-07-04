@@ -175,6 +175,10 @@
           <div class="card-tags">
             <span class="tag-react">React</span>
             <span class="tag-mobile">Mobile</span>
+            <span class="tag-dart">Dart</span>
+            <span class="tag-c">C++</span>
+            <span class="tag-html">HTML</span>
+            <span class="tag-css">CSS</span>
           </div>
           <div class="card-links">
             <span class="card-link card-link-disabled">
@@ -248,6 +252,38 @@
             </a>
             <a href="https://codeninja-cni.github.io/Shortn.github.io/" class="card-link">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              Live Demo
+            </a>
+          </div>
+        </article>
+
+                <article class="cardx reveal">
+          <div class="card-icon">�</div>
+          <h4>PhoneTrace</h4>
+          <p>A phone number location tracer.</p>
+
+          <div class="card-why">
+            <span class="why-label">Why I built this</span>
+            <p>I built this to help users quickly identify the location behind a phone number, so they can verify unknown callers and feel more confident handling suspicious or unexpected calls.</p>
+          </div>
+
+          <div class="card-tags">
+            <span class="tag-python">PYTHON</span>
+          </div>
+          <div class="card-links">
+            <a href="https://github.com/CodeNinja-cni/PhoneTrace.github.io" class="card-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+              </svg>
+              GitHub
+            </a>
+            <a href="" class="card-link card-link-disabled" aria-readonly="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-readonly="true">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
@@ -344,9 +380,9 @@
       <div class="contact-divider">or send a message directly</div>
       <div class="contactform">
         <form class="contact-form" id="contact-form">
-          <input type="text" id="name" name="from_name" placeholder="Your Name" required>
+          <input type="text" id="messanger" name="from_name" placeholder="Your Name" required>
           <input type="email" id="email" name="from_email" placeholder="Your Email" required>
-          <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+          <textarea id="content" name="message" placeholder="Your Message" required></textarea>
           <button type="submit" class="btn-glow">Send Message</button>
         </form>
       </div>
@@ -358,6 +394,16 @@
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="script.js"></script>
+  <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "DeUhZdy9m7MKnYQAb",
+      });
+   })();
+</script>
 </body>
-
+</head>
 </html>

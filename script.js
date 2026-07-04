@@ -1,28 +1,28 @@
-console.log("CodeNinja loaded 🚀");
+console.log("Ibrahim.dev loaded 🚀");
 
 /* ══════════════════════════════════════════════
    0. EMAILJS CONFIG
-   ─ Sign up at https://emailjs.com (free)
-   ─ Create a service, email template, then
-     replace the three strings below with your
-     real IDs from the EmailJS dashboard.
    ══════════════════════════════════════════════ */
-const EMAILJS_PUBLIC_KEY  = "-Q3JjosgvNeUgYDNY";     // Account → API Keys
-const EMAILJS_SERVICE_ID  = "service_e48hxxp";     // Email Services → Service ID
-const EMAILJS_TEMPLATE_ID = "template_0mtip9e";    // Email Templates → Template ID
+const EMAILJS_PUBLIC_KEY  = "DeUhZdy9m7MKnYQAb";
+const EMAILJS_SERVICE_ID  = "service_sg6xc1j";
+const EMAILJS_TEMPLATE_ID = "template_b9kbgdb";
 
-document.addEventListener("DOMContentLoaded", () => {
-  if (window.emailjs && EMAILJS_PUBLIC_KEY !== "-Q3JjosgvNeUgYDNY") {
-    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+// Initialise EmailJS as early as possible
+(function initEmailJS() {
+  function tryInit() {
+    if (window.emailjs) {
+      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+      console.log("EmailJS initialised ✓");
+    } else {
+      setTimeout(tryInit, 200);
+    }
   }
-});
+  tryInit();
+})();
 
 
 /* ══════════════════════════════════════════════
    1. THREE.JS 3D HERO BACKGROUND
-   Palette: deep navy-indigo (#0A0E27) base, with
-   indigo (#6366F1), purple (#8B5CF6), and sky
-   blue (#38BDF8) particles + wireframes
    ══════════════════════════════════════════════ */
 (function () {
   const canvas = document.getElementById("bg-canvas");
@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200);
   camera.position.z = 50;
 
-  // — Particle field —
   const count = 2200;
   const pos   = new Float32Array(count * 3);
   const col   = new Float32Array(count * 3);
@@ -59,14 +58,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const mat = new THREE.PointsMaterial({ size: 0.36, vertexColors: true, transparent: true, opacity: 0.8 });
   scene.add(new THREE.Points(geo, mat));
 
-  // — Wireframe torus —
   const torus = new THREE.Mesh(
     new THREE.TorusGeometry(12, 3, 18, 90),
     new THREE.MeshStandardMaterial({ color: "#8B5CF6", wireframe: true, transparent: true, opacity: 0.24 })
   );
   scene.add(torus);
 
-  // — Wireframe icosahedron —
   const ico = new THREE.Mesh(
     new THREE.IcosahedronGeometry(6, 1),
     new THREE.MeshStandardMaterial({ color: "#38BDF8", wireframe: true, transparent: true, opacity: 0.28 })
@@ -74,7 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
   ico.position.set(20, 6, -12);
   scene.add(ico);
 
-  // — Floating sphere —
   const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(3, 24, 24),
     new THREE.MeshStandardMaterial({ color: "#6366F1", wireframe: true, transparent: true, opacity: 0.3 })
@@ -82,7 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
   sphere.position.set(-22, -8, -8);
   scene.add(sphere);
 
-  // — Extra: small rotating octahedron —
   const octa = new THREE.Mesh(
     new THREE.OctahedronGeometry(4, 0),
     new THREE.MeshStandardMaterial({ color: "#22D3A5", wireframe: true, transparent: true, opacity: 0.26 })
@@ -90,13 +85,11 @@ document.addEventListener("DOMContentLoaded", () => {
   octa.position.set(-18, 14, -6);
   scene.add(octa);
 
-  // — Lights —
   scene.add(new THREE.AmbientLight(0xffffff, 0.55));
   const pLight = new THREE.PointLight("#6366F1", 2.2, 120);
   pLight.position.set(15, 15, 15);
   scene.add(pLight);
 
-  // — Mouse parallax —
   let mx = 0, my = 0;
   document.addEventListener("mousemove", e => {
     mx = (e.clientX / window.innerWidth  - 0.5) * 2;
@@ -114,28 +107,21 @@ document.addEventListener("DOMContentLoaded", () => {
   function animate() {
     requestAnimationFrame(animate);
     t += 0.004;
-
     particles.rotation.y = t * 0.07 + mx * 0.12;
     particles.rotation.x = my * 0.08;
-
     torus.rotation.x = t * 0.35;
     torus.rotation.y = t * 0.2;
     torus.position.x = Math.sin(t * 0.4) * 5;
-
     ico.rotation.y   = t * 0.55;
     ico.rotation.x   = t * 0.25;
     ico.position.y   = Math.sin(t * 0.6) * 3 + 6;
-
     sphere.rotation.y = t * 0.8;
     sphere.position.y = Math.cos(t * 0.5) * 3 - 8;
-
     octa.rotation.x = t * 0.4;
     octa.rotation.z = t * 0.3;
     octa.position.x = Math.sin(t * 0.35) * 4 - 18;
-
     camera.position.x += (mx * 6 - camera.position.x) * 0.04;
     camera.position.y += (my * 4 - camera.position.y) * 0.04;
-
     renderer.render(scene, camera);
   }
   animate();
@@ -143,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* ══════════════════════════════════════════════
-   2. FLOATING NAVBAR — shrink on scroll + active link
+   2. FLOATING NAVBAR
    ══════════════════════════════════════════════ */
 const navbar   = document.querySelector(".navbar");
 const sections = document.querySelectorAll("section[id]");
@@ -151,7 +137,6 @@ const navLinks = document.querySelectorAll(".nav-links a");
 
 function updateNavOnScroll() {
   navbar.classList.toggle("scrolled", window.scrollY > 40);
-
   let current = "";
   sections.forEach(sec => {
     if (window.scrollY >= sec.offsetTop - 160) current = sec.id;
@@ -163,7 +148,6 @@ function updateNavOnScroll() {
 window.addEventListener("scroll", updateNavOnScroll, { passive: true });
 updateNavOnScroll();
 
-// smooth scroll on nav click
 navLinks.forEach(link => {
   link.addEventListener("click", function (e) {
     e.preventDefault();
@@ -172,9 +156,8 @@ navLinks.forEach(link => {
   });
 });
 
-// mobile dropdown toggle
 (function setupMobileNav() {
-  const toggle    = document.getElementById("nav-toggle");
+  const toggle     = document.getElementById("nav-toggle");
   const navLinksEl = document.getElementById("nav-links");
   if (!toggle || !navLinksEl) return;
 
@@ -202,8 +185,11 @@ navLinks.forEach(link => {
 
 
 /* ══════════════════════════════════════════════
-   3. CONTACT FORM — EmailJS send
+   3. CONTACT FORM — EmailJS
    ══════════════════════════════════════════════ */
+const MY_EMAIL    = "ibrohimolawuyi4peace@gmail.com";
+const MY_WHATSAPP = "+2348063526733";
+
 const form      = document.getElementById("contact-form");
 const submitBtn = form ? form.querySelector("button[type='submit']") : null;
 
@@ -211,17 +197,23 @@ if (form) {
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const name    = document.getElementById("name").value.trim();
+    const name    = document.getElementById("messanger").value.trim();
     const email   = document.getElementById("email").value.trim();
-    const message = document.getElementById("message").value.trim();
+    const message = document.getElementById("content").value.trim();
 
     if (!name || !email || !message) {
       showToast("Please fill in all fields.", "error");
       return;
     }
 
-    if (!window.emailjs || EMAILJS_SERVICE_ID === "service_e48hxxp" || EMAILJS_TEMPLATE_ID === "template_0mtip9e") {
-      showToast("Form isn't connected yet — email me directly for now.", "error");
+    // EmailJS not loaded yet — show direct contact info
+    if (!window.emailjs) {
+      showToast(
+        `Couldn't reach the mail service. Contact me directly:<br>
+         📧 <strong>${MY_EMAIL}</strong><br>
+         💬 WhatsApp: <strong>${MY_WHATSAPP}</strong>`,
+        "error"
+      );
       return;
     }
 
@@ -229,12 +221,23 @@ if (form) {
     submitBtn.textContent = "Sending…";
 
     try {
-      await emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form);
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        from_name:  name,
+        from_email: email,
+        message:    message,
+        reply_to:   email,
+      });
       showToast(`Message sent! I'll get back to you soon, ${name} 🚀`, "success");
       form.reset();
     } catch (err) {
       console.error("EmailJS error:", err);
-      showToast("Oops — something went wrong. Try emailing me directly.", "error");
+      // Always show direct contact details when send fails
+      showToast(
+        `Something went wrong. Reach me directly instead:<br>
+         📧 <strong>${MY_EMAIL}</strong><br>
+         💬 WhatsApp: <strong>${MY_WHATSAPP}</strong>`,
+        "error"
+      );
     } finally {
       submitBtn.disabled    = false;
       submitBtn.textContent = "Send Message";
@@ -270,17 +273,17 @@ function showToast(msg, type = "success") {
                      ? "linear-gradient(135deg,rgba(34,211,165,0.22),rgba(34,211,165,0.08))"
                      : "linear-gradient(135deg,rgba(239,68,68,0.18),rgba(239,68,68,0.08))",
     border:        `1px solid ${type === "success" ? "rgba(34,211,165,0.45)" : "rgba(239,68,68,0.35)"}`,
-    backdropFilter:"blur(14px)",
-    color:         "#EDEFF7",
-    fontFamily:    "'DM Sans', sans-serif",
-    fontSize:      "0.9rem",
-    fontWeight:    "500",
-    boxShadow:     "0 8px 32px rgba(0,0,0,0.4)",
-    transform:     "translateY(20px)",
-    opacity:       "0",
-    transition:    "all 0.4s cubic-bezier(0.22,1,0.36,1)",
-    maxWidth:      "360px",
-    lineHeight:    "1.45",
+    backdropFilter: "blur(14px)",
+    color:          "#EDEFF7",
+    fontFamily:     "'DM Sans', sans-serif",
+    fontSize:       "0.9rem",
+    fontWeight:     "500",
+    boxShadow:      "0 8px 32px rgba(0,0,0,0.4)",
+    transform:      "translateY(20px)",
+    opacity:        "0",
+    transition:     "all 0.4s cubic-bezier(0.22,1,0.36,1)",
+    maxWidth:       "380px",
+    lineHeight:     "1.6",
   });
 
   document.body.appendChild(toast);
@@ -289,11 +292,13 @@ function showToast(msg, type = "success") {
     toast.style.opacity   = "1";
   });
 
+  // error toasts with contact info stay longer (8s)
+  const delay = type === "error" ? 8000 : 5000;
   setTimeout(() => {
     toast.style.transform = "translateY(20px)";
     toast.style.opacity   = "0";
     toast.addEventListener("transitionend", () => toast.remove());
-  }, 5000);
+  }, delay);
 }
 
 
@@ -325,7 +330,6 @@ function type() {
   const word = words[wi];
   deleting ? ci-- : ci++;
   typingEl.textContent = word.substring(0, ci);
-
   if (!deleting && ci === word.length) {
     deleting = true;
     setTimeout(type, 1200);
@@ -341,7 +345,7 @@ type();
 
 
 /* ══════════════════════════════════════════════
-   7. CURSOR GLOW (desktop / hover-capable only)
+   7. CURSOR GLOW
    ══════════════════════════════════════════════ */
 const glow = document.querySelector(".cursor-glow");
 if (glow && window.matchMedia("(hover: hover)").matches) {
@@ -353,7 +357,7 @@ if (glow && window.matchMedia("(hover: hover)").matches) {
 
 
 /* ══════════════════════════════════════════════
-   8. CARD TILT (subtle 3-D on hover)
+   8. CARD TILT
    ══════════════════════════════════════════════ */
 if (window.matchMedia("(hover: hover)").matches) {
   document.querySelectorAll(".cardx").forEach(card => {
@@ -375,7 +379,7 @@ if (window.matchMedia("(hover: hover)").matches) {
 
 
 /* ══════════════════════════════════════════════
-   10. SKILLS PROFICIENCY — animated bars + counters
+   9. SKILLS PROFICIENCY — animated bars
    ══════════════════════════════════════════════ */
 (function setupProficiency() {
   const block = document.querySelector(".proficiency-block");
@@ -386,13 +390,12 @@ if (window.matchMedia("(hover: hover)").matches) {
 
   function runAnimation() {
     items.forEach((item, i) => {
-      const fill = item.querySelector(".prof-fill");
-      const pct  = item.querySelector(".prof-pct");
+      const fill   = item.querySelector(".prof-fill");
+      const pct    = item.querySelector(".prof-pct");
       const target = parseInt(fill.dataset.fill, 10);
 
       setTimeout(() => {
         fill.style.width = target + "%";
-
         const duration = 1300;
         const start = performance.now();
         function step(ts) {
@@ -406,28 +409,23 @@ if (window.matchMedia("(hover: hover)").matches) {
     });
   }
 
-  const obs = new IntersectionObserver(entries => {
+  new IntersectionObserver(entries => {
     if (entries[0].isIntersecting && !triggered) {
       triggered = true;
       runAnimation();
     }
-  }, { threshold: 0.35 });
-
-  obs.observe(block);
+  }, { threshold: 0.35 }).observe(block);
 })();
 
 
 /* ══════════════════════════════════════════════
-   11. STAT COUNTER ANIMATION
+   10. STAT COUNTER ANIMATION
    ══════════════════════════════════════════════ */
 function animateCounter(el, target, duration = 1400) {
-  const isInfinity = el.textContent.trim() === "∞";
-  if (isInfinity) return;
-
+  if (el.textContent.trim() === "∞") return;
   let start       = null;
   const numTarget = parseFloat(target);
   const suffix    = target.replace(/[\d.]/g, "");
-
   function step(ts) {
     if (!start) start = ts;
     const progress = Math.min((ts - start) / duration, 1);
@@ -442,16 +440,10 @@ const statsBar = document.querySelector(".stats-bar");
 if (statsBar) {
   let counted = false;
   const statNums = statsBar.querySelectorAll(".stat-num");
-
-  const statsObs = new IntersectionObserver(entries => {
+  new IntersectionObserver(entries => {
     if (entries[0].isIntersecting && !counted) {
       counted = true;
-      statNums.forEach(el => {
-        const raw = el.textContent.trim();
-        animateCounter(el, raw);
-      });
+      statNums.forEach(el => animateCounter(el, el.textContent.trim()));
     }
-  }, { threshold: 0.5 });
-
-  statsObs.observe(statsBar);
+  }, { threshold: 0.5 }).observe(statsBar);
 }
